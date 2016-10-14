@@ -26,6 +26,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" /> 
+<!-- select2 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 
   <link rel="stylesheet" href="http://openlayers.org/en/v3.18.2/css/ol.css" type="text/css">
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -62,7 +64,7 @@ desired effect
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="#" class="logo">
+    <a href="index.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>D</b>T</span>
       <!-- logo for regular state and mobile devices -->
@@ -88,13 +90,14 @@ desired effect
       </div>
 
       <!-- search form (Optional) -->
-      <form action="#" method="get" class="sidebar-form">
+      <form class="sidebar-form">
         <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
+          <!-- <input type="text" name="q" class="form-control" placeholder="Search..."> -->
+          <select class="js-example-basic-multiple form-control" name="emp" multiple="multiple"></select>
+          <span class="input-group-btn">
+            <button id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+            </button>
+          </span>
         </div>
       </form>
       <!-- /.search form -->
@@ -110,7 +113,7 @@ desired effect
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#">BPO</a></li>
+            <li><a href="#" id="bpo">BPO</a></li>
             <li><a href="#">SOFTWARE</a></li>
             <li><a href="#">DATA CENTER</a></li>
             <li><a href="#">HARDWARE</a></li>
@@ -189,7 +192,22 @@ desired effect
 <script src="dist/js/app.min.js"></script>
 <!-- Leaflet JavaScript -->
 <script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+<!-- select2 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
+<script type="text/javascript">
+var selectEmpresas = [{ id: 0, text: 'empresa1' }, { id: 1, text: 'empresa2' }, { id: 2, text: 'empresa3' }, { id: 3, text: 'empresa4' }, { id: 4, text: 'empresa5' }];
+
+  $(".js-example-basic-multiple").select2({
+    placeholder: "Search...",
+    data: selectEmpresas,
+    maximumSelectionLength: 1
+  });
+</script>
+
 <script>
+
+var empresas = [{id: 0, name: 'empresa1', lat: -34.637942, lon: -58.399942, sector: 'bpo'}, {id: 1, name: 'empresa2', lat: -34.636742, lon: -58.399942, sector: 'bpo'}]
 
   //Lat y long del centro de parque patricios
   var mymap = L.map('mapid').setView([-34.637942, -58.399942], 14);
@@ -199,16 +217,31 @@ desired effect
     accessToken: 'pk.eyJ1IjoiYWxhdGEiLCJhIjoiY2l0a2hhdTR3MGF3MDJ0bWs1b3o5c2VvdSJ9.13r4WoQjGzXyMOVriSSKsg'
   }).addTo(mymap);
 
-  var marker = L.marker([-34.637942, -58.399942]).addTo(mymap);
-  marker.bindPopup("<b>Hello world!</b><br>I am a popup.")
+  addMarks(empresas);
 
   //Son los limites de parque patricios, habria q cambiarlo por el de distrito tecnologico
-  var polygon = L.polygon([
-    [-34.630403, -58.411723],
-    [-34.627383, -58.391102],
-    [-34.640166, -58.389900],
-    [-34.648428, -58.412216],
-  ]).addTo(mymap);
+  var border = [[-34.630403, -58.411723],[-34.627383, -58.391102],[-34.640166, -58.389900],[-34.648428, -58.412216]];
+  var polygon = L.polygon(border).addTo(mymap);
+
+  $("#bpo").on('click', function() { 
+    //sacar el polygon
+    removePolygon();
+    //sacar todas las marcas
+    //agregar las marcas de este sector
+  });
+
+  function removePolygon(){
+    mymap.removeLayer(polygon);
+  }
+
+  function addMarks(data){
+    //TODO revisar esto
+    for (var i in data){
+      var marker = L.marker([data[i].lat, data[i].lon]).addTo(mymap);
+      marker.addTo(mymap);
+      marker.bindPopup(data[i].name)
+    }
+  }
 
 </script>
 
