@@ -150,7 +150,7 @@ desired effect
               <!-- small box -->
               <div class="small-box bg-aqua">
                 <div class="inner">
-                  <h3>245</h3>
+                  <h3 id="company-count"></h3>
 
                   <p>Cantidad de empresas</p>
                 </div>
@@ -502,28 +502,36 @@ desired effect
   }
 
   function addMarkersBySector(sector){
+    var count = 0;
     for(var key in raw_companies){
       if(raw_companies[key].sector == sector){
         companiesMarkers[key].addTo(mymap);
+        count++;
       }else{
         companiesMarkers[key].removeFrom(mymap)
       }
     }
+    $( "#company-count" ).text(count);
   }
   function addMarker(id){
     companiesMarkers[id].addTo(mymap);
+    $( "#company-count" ).text("1");
   }
 
   function addAllMarkers(){
+    var count = 0;
     for (var key in companiesMarkers) {
+      count++;
       companiesMarkers[key].addTo(mymap);
-    } 
+    }
+    $( "#company-count" ).text(count);
   }
 
   function removeAllMarkers(){
    for (var key in companiesMarkers) {
       companiesMarkers[key].removeFrom(mymap);
     } 
+    $( "#company-count" ).text("0")
   }
   
   if(location.search.includes("company_id")){
