@@ -113,11 +113,11 @@ desired effect
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#" id="bpo">BPO</a></li>
-            <li><a href="#">SOFTWARE</a></li>
-            <li><a href="#">DATA CENTER</a></li>
-            <li><a href="#">HARDWARE</a></li>
-            <li><a href="#">E-COMMERCE</a></li>
+            <li><a href="#" onclick="addMarkersBySector('BPO');" id="bpo">BPO</a></li>
+            <li><a href="#" onclick="addMarkersBySector('SOFTWARE');">SOFTWARE</a></li>
+            <li><a href="#" onclick="addMarkersBySector('DATA CENTER');">DATA CENTER</a></li>
+            <li><a href="#" onclick="addMarkersBySector('HARDWARE');">HARDWARE</a></li>
+            <li><a href="#" onclick="addMarkersBySector('E-COMMERCE');">E-COMMERCE</a></li>
           </ul>
         </li>
       </ul>
@@ -490,17 +490,26 @@ desired effect
   var border = [[-34.630403, -58.411723],[-34.627383, -58.391102],[-34.640166, -58.389900],[-34.648428, -58.412216]];
   var polygon = L.polygon(border).addTo(mymap);
 
-  $("#bpo").on('click', function() { 
-    //sacar el polygon
-    removePolygon();
-    //sacar todas las marcas
-    //agregar las marcas de este sector
-  });
+//  $("#bpo").on('click', function() { 
+//    //sacar el polygon
+//    removePolygon();
+//    //sacar todas las marcas
+//    //agregar las marcas de este sector
+//  });
 
   function removePolygon(){
     mymap.removeLayer(polygon);
   }
 
+  function addMarkersBySector(sector){
+    for(var key in raw_companies){
+      if(raw_companies[key].sector == sector){
+        companiesMarkers[key].addTo(mymap);
+      }else{
+        companiesMarkers[key].removeFrom(mymap)
+      }
+    }
+  }
   function addMarker(id){
     companiesMarkers[id].addTo(mymap);
   }
