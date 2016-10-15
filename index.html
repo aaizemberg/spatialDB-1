@@ -162,6 +162,26 @@ desired effect
             </div>
           </div>
         </div>
+        <div class="col-lg-3 col-xs-3">
+          <div class="row">
+            <div class="col-lg-12 col-xs-8">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <a href="#" onclick="addAllMarkers();" class="small-box-footer">Mostrar todas las empresas <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-xs-3">
+          <div class="row">
+            <div class="col-lg-12 col-xs-8">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <a href="#" onclick="removeAllMarkers();" class="small-box-footer">Ocultar todas las empresas <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
     </section>
@@ -443,14 +463,16 @@ desired effect
 
 <script>
 
-var empresas = [];
+  // Diccionario con el ID de la empresa y con el Marker utilizado por leaflet
+  var companiesMarkers = {};
   
   for (var key in raw_companies) {
     if (raw_companies.hasOwnProperty(key)) {
-      empresas.push({id: key, name: raw_companies[key]['name'], lat: raw_companies[key]['latitude'],
-                     lon: raw_companies[key]['longitud'], sector: raw_companies[key]['sector']});
+      var marker = L.marker([raw_companies[key]['latitude'], raw_companies[key]['longitud']]);
+      companiesMarkers[key] = marker;
     }
   }
+  
   //Lat y long del centro de parque patricios
   var mymap = L.map('mapid').setView([-34.637942, -58.399942], 14);
 
@@ -458,8 +480,6 @@ var empresas = [];
     maxZoom: 18,
     accessToken: 'pk.eyJ1IjoiYWxhdGEiLCJhIjoiY2l0a2hhdTR3MGF3MDJ0bWs1b3o5c2VvdSJ9.13r4WoQjGzXyMOVriSSKsg'
   }).addTo(mymap);
-
-  addMarks(empresas);
 
   //Son los limites de parque patricios, habria q cambiarlo por el de distrito tecnologico
   var border = [[-34.630403, -58.411723],[-34.627383, -58.391102],[-34.640166, -58.389900],[-34.648428, -58.412216]];
@@ -476,15 +496,22 @@ var empresas = [];
     mymap.removeLayer(polygon);
   }
 
-  function addMarks(data){
-    //TODO revisar esto
-    for (var i in data){
-      var marker = L.marker([data[i].lat, data[i].lon]).addTo(mymap);
-      marker.addTo(mymap);
-      marker.bindPopup(data[i].name)
-    }
+  function addMarker(id){
+    companiesMarkers[id].addTo(mymap);
   }
 
+  function addAllMarkers(){
+    for (var key in companiesMarkers) {
+      companiesMarkers[key].addTo(mymap);
+    } 
+  }
+
+  function removeAllMarkers(){
+   for (var key in companiesMarkers) {
+      companiesMarkers[key].removeFrom(mymap);
+    } 
+  }
+  addAllMarkers();
 </script>
 
 </body>
