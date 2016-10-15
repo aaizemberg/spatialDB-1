@@ -93,7 +93,7 @@ desired effect
       <form class="sidebar-form">
         <div class="input-group">
           <!-- <input type="text" name="q" class="form-control" placeholder="Search..."> -->
-          <select class="js-example-basic-multiple form-control" name="company-id" multiple="multiple"></select>
+          <select class="js-example-basic-multiple form-control" name="company_id" multiple="multiple"></select>
           <span class="input-group-btn">
             <button id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
             </button>
@@ -516,7 +516,14 @@ desired effect
       companiesMarkers[key].removeFrom(mymap);
     } 
   }
-  addAllMarkers();
+  
+  if(location.search.includes("company_id")){
+    var id = location.search.substring(12);
+    addMarker(id);
+  }else{
+    addAllMarkers();
+  }
+
 </script>
 
 </body>
