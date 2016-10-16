@@ -477,11 +477,12 @@ desired effect
       sector = raw_companies[key].sector;
       marker = L.marker([raw_companies[key]['latitude'], raw_companies[key]['longitud']], {icon:getColorIcon(sector)});
       companiesMarkers[key] = marker;
-      marker.bindPopup("<p>Empresa: " + raw_companies[key].name + "</p>" +
+      marker.bindPopup("<b> " + raw_companies[key].name + "</b>" +
                        "<p>Dirección: " + raw_companies[key].address + "</p>" +
                        "<p>Sector: " + sector + "</p>" +
                        "<p>Origen: " + raw_companies[key].origin + "</p>" +
-                       "<p>Estado: " + raw_companies[key].status + "</p>");
+                       "<p>Estado: " + raw_companies[key].status + "</p>" );//+
+                       //"<a href=\"#\" onclick=\"moreInfo('"+ key + "');\">Mas informacion</a>");
     }
   }
   
@@ -558,6 +559,11 @@ desired effect
     addMarker(id);
   }else{
     addAllMarkers();
+  }
+
+  function moreInfo(id){
+    console.log(id);
+    marker.closePopup();
   }
 
 </script>
