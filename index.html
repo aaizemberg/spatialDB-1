@@ -113,11 +113,14 @@ desired effect
             </span>
           </a>
           <ul class="treeview-menu">
+            <li><a href="#" onclick="addAllMarkers('BPO');">Todos</a></li>
             <li><a href="#" onclick="addMarkersBySector('BPO');" id="bpo">BPO</a></li>
-            <li><a href="#" onclick="addMarkersBySector('SOFTWARE');">SOFTWARE</a></li>
             <li><a href="#" onclick="addMarkersBySector('DATA CENTER');">DATA CENTER</a></li>
-            <li><a href="#" onclick="addMarkersBySector('HARDWARE');">HARDWARE</a></li>
             <li><a href="#" onclick="addMarkersBySector('E-COMMERCE');">E-COMMERCE</a></li>
+            <li><a href="#" onclick="addMarkersBySector('EDUCACION');">EDUCACION</a></li>
+            <li><a href="#" onclick="addMarkersBySector('HARDWARE');">HARDWARE</a></li>
+            <li><a href="#" onclick="addMarkersBySector('INGENIERIA');">INGENIERIA</a></li>
+            <li><a href="#" onclick="addMarkersBySector('SOFTWARE');">SOFTWARE</a></li>
           </ul>
         </li>
       </ul>
@@ -212,6 +215,7 @@ desired effect
 <script src="dist/js/app.min.js"></script>
 <!-- Leaflet JavaScript -->
 <script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+<script src="js/leaflet-color-markers.js"></script>
 <!-- select2 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 <script type="text/javascript">
@@ -231,7 +235,7 @@ desired effect
     12: {name: 'CORA-DIR', origin: 'Nacional', sector: 'HARDWARE', status: 'En Operación', address: 'USPALLATA 2853', latitude: -34.638932, longitud: -58.402139},
     13: {name: 'NOVATECH', origin: 'Nacional', sector: 'HARDWARE', status: 'En Operación', address: 'USPALLATA 2768', latitude: -34.638767, longitud: -58.400868},
     14: {name: 'DINATECH', origin: 'Nacional', sector: 'BPO', status: 'En Operación', address: 'ZAVALETA 85', latitude: -34.637712, longitud: -58.403644},
-    15: {name: 'HIT 1', origin: 'Nacional', sector: 'DATA', CENTER: 'status En Operación', address: 'CHICLANA 3345', latitude: -34.63447, longitud: -58.411518},
+    15: {name: 'HIT 1', origin: 'Nacional', sector: 'DATA CENTER', status: 'En Operación', address: 'CHICLANA 3345', latitude: -34.63447, longitud: -58.411518},
     16: {name: 'BANGHO', origin: 'Nacional', sector: 'HARDWARE', status: 'En Operación', address: 'AV. BRASIL 3031', latitude: -34.633812, longitud: -58.406678},
     17: {name: 'SERSAT', origin: 'Nacional', sector: 'BPO', status: 'En Operación', address: 'AV. JUJUY 1956', latitude: -34.633168, longitud: -58.399815},
     18: {name: 'GRUPO NUCLEO', origin: 'Nacional', sector: 'HARDWARE', status: 'En Operación', address: 'USPALLATA 2768', latitude: -34.638767, longitud: -58.400868},
@@ -269,14 +273,14 @@ desired effect
     50: {name: 'GENERAL PLASTIC CORP', origin: 'Nacional', sector: 'BPO', status: 'En Operación', address: 'LOS PATOS 2526', latitude: -34.63922, longitud: -58.39663},
     51: {name: 'NITIS', origin: 'Nacional', sector: 'SOFTWARE', status: 'En Operación', address: 'AV. BRASIL 2883', latitude: -34.632971, longitud: -58.404237},
     52: {name: 'VIDEOSWITCH', origin: 'Nacional', sector: 'HARDWARE', status: 'En Operación', address: 'USPALLATA 3579', latitude: -34.64106, longitud: -58.413571},
-    53: {name: 'DESPEGAR.COM', origin: 'Exterior', sector: 'e', COMMERCE: 'status En Operación', address: 'AV. JUJUY 2013', latitude: -34.633985, longitud: -58.399706},
+    53: {name: 'DESPEGAR.COM', origin: 'Exterior', sector: 'E-COMMERCE', status: 'En Operación', address: 'AV. JUJUY 2013', latitude: -34.633985, longitud: -58.399706},
     54: {name: 'GEOSYSTEMS', origin: 'Nacional', sector: 'SOFTWARE', status: 'En Operación', address: 'ESTEBAN DE LUCA 2223', latitude: -34.635719, longitud: -58.402374},
     55: {name: 'REPORTE INFORMATIVO', origin: 'Nacional', sector: 'SOFTWARE', status: 'En Operación', address: 'ZAVALETA 219', latitude: -34.639566, longitud: -58.403233},
     56: {name: 'DELFAU', origin: 'Nacional', sector: 'SOFTWARE', status: 'En Operación', address: 'MANUEL GARCIA 276', latitude: -34.638735, longitud: -58.396211},
     57: {name: 'BUFFA SISTEMAS', origin: 'Nacional', sector: 'SOFTWARE', status: 'En Operación', address: 'AV. CASEROS 3227', latitude: -34.637758, longitud: -58.409748},
     58: {name: 'FULLTRACE', origin: 'Nacional', sector: 'SOFTWARE', status: 'En Operación', address: 'AV. COLONIA 370', latitude: -34.640319, longitud: -58.397036},
     59: {name: 'GC GESTIÓN COMPARTIDA', origin: 'Nacional', sector: 'BPO', status: 'En Operación', address: 'PATAGONES 2548', latitude: -34.636902, longitud: -58.397751},
-    60: {name: 'IPLAN', origin: 'Nacional', sector: 'DATA', CENTER: 'status En Operación', address: 'LOS PATOS 2948', latitude: -34.640754, longitud: -58.403822},
+    60: {name: 'IPLAN', origin: 'Nacional', sector: 'DATA CENTER', status: 'En Operación', address: 'LOS PATOS 2948', latitude: -34.640754, longitud: -58.403822},
     61: {name: 'GOODWELL SOFTWARE ARGENTINA', origin: 'Nacional', sector: 'SOFTWARE', status: 'En Operación', address: 'ARRIOLA 49', latitude: -34.637265, longitud: -58.402883},
     62: {name: 'SYNCHRO TECNH', origin: 'Nacional', sector: 'SOFTWARE', status: 'En Operación', address: 'IGUAZÚ 280', latitude: -34.640981, longitud: -58.406286},
     63: {name: 'TEKII', origin: 'Nacional', sector: 'SOFTWARE', status: 'En Operación', address: 'ELIA 551', latitude: -34.644427, longitud: -58.408508},
@@ -292,7 +296,7 @@ desired effect
     73: {name: 'MOVIL CARGA', origin: 'Nacional', sector: 'BPO', status: 'En Operación', address: 'DEAN FUNES 2077', latitude: -34.635192, longitud: -58.404191},
     74: {name: 'IADEV', origin: 'Nacional', sector: 'BPO', status: 'En Operación', address: 'RONDEAU 3124', latitude: -34.636514, longitud: -58.40818},
     75: {name: 'LAKAUT', origin: 'Nacional', sector: 'BPO', status: 'En Operación', address: 'AV. CASEROS 3371', latitude: -34.638255, longitud: -58.412666},
-    76: {name: 'PAY-U LATAM', origin: 'Exterior', sector: 'e', COMMERCE: 'status  En Operación', address: 'RONDEAU 2664', latitude: -34.634976, longitud: -58.400256},
+    76: {name: 'PAY-U LATAM', origin: 'Exterior', sector: 'E-COMMERCE', status: 'En Operación', address: 'RONDEAU 2664', latitude: -34.634976, longitud: -58.400256},
     77: {name: 'TEKNARIA', origin: 'Nacional', sector: 'BPO', status: 'En Operación', address: 'AV. CASEROS 3405', latitude: -34.638397, longitud: -58.413379},
     78: {name: 'EXISOFT', origin: 'Nacional', sector: 'SOFTWARE', status: 'En Operación', address: 'MONTEAGUDO 252', latitude: -34.640493, longitud: -58.404918},
     79: {name: 'ASSERT SOLUTIONS', origin: 'Nacional', sector: 'SOFTWARE', status: 'En Operación', address: 'CATULO CASTILLO 2630', latitude: -34.63289, longitud: -58.400638},
@@ -300,7 +304,7 @@ desired effect
     81: {name: 'DIGITAL FILE', origin: 'Nacional', sector: 'BPO', status: 'En Operación', address: 'AV. JUJUY 1963', latitude: -34.633398, longitud: -58.399942},
     82: {name: 'LUGALU', origin: 'Nacional', sector: 'SOFTWARE', status: 'En Operación', address: 'MONTEAGUDO 532', latitude: -34.643831, longitud: -58.404238},
     83: {name: 'SGB INFORMATION SERVICES', origin: 'Nacional', sector: 'BPO', status: 'En Operación', address: 'PEPIRI 286', latitude: -34.641504, longitud: -58.409031},
-    84: {name: 'BUMERAN', origin: 'Nacional', sector: 'e', COMMERCE: 'status  En Operación', address: 'RONDEAU 2664', latitude: -34.634976, longitud: -58.400256},
+    84: {name: 'BUMERAN', origin: 'Nacional', sector: 'E-COMMERCE', status: 'En Operación', address: 'RONDEAU 2664', latitude: -34.634976, longitud: -58.400256},
     85: {name: 'UNIVERSOBIT', origin: 'Nacional', sector: 'SOFTWARE', status: 'En Operación', address: 'RONDEAU 2664', latitude: -34.634976, longitud: -58.400256},
     86: {name: 'SITEPRO', origin: 'Nacional', sector: 'SOFTWARE', status: 'En Operación', address: 'CATULO CASTILLO 2630', latitude: -34.63289, longitud: -58.400638},
     87: {name: 'SERDATA', origin: 'Nacional', sector: 'SOFTWARE', status: 'En Operación', address: 'PATAGONES 2750', latitude: -34.637495, longitud: -58.400901},
@@ -312,8 +316,8 @@ desired effect
     93: {name: 'TELINFOR', origin: 'Nacional', sector: 'BPO', status: 'En operación', address: 'CATULO CASTILLO 2630', latitude: -34.63289, longitud: -58.400638},
     94: {name: 'QUASS SRL', origin: 'Nacional', sector: 'SOFTWARE', status: 'En Operación', address: 'AV. JUJUY 1963', latitude: -34.633398, longitud: -58.399942},
     95: {name: 'B2CLOUD', origin: 'Nacional', sector: 'BPO', status: 'En Operación', address: 'AV. JUJUY 1963', latitude: -34.633398, longitud: -58.399942},
-    96: {name: 'POSNET', origin: 'Exterior', sector: 'DATA', CENTER: 'status  En Operación', address: 'RONDEAU 3439', latitude: -34.637033, longitud: -58.41272},
-    97: {name: 'FIRST DATA', origin: 'Exterior', sector: 'DATA', CENTER: 'status  En Operación', address: 'RONDEAU 3439', latitude: -34.637033, longitud: -58.41272},
+    96: {name: 'POSNET', origin: 'Exterior', sector: 'DATA CENTER', status: 'En Operación', address: 'RONDEAU 3439', latitude: -34.637033, longitud: -58.41272},
+    97: {name: 'FIRST DATA', origin: 'Exterior', sector: 'DATA CENTER', status: 'En Operación', address: 'RONDEAU 3439', latitude: -34.637033, longitud: -58.41272},
     98: {name: 'TR ARGENTINA', origin: 'Nacional', sector: 'BPO', status: 'En Operación', address: 'CATULO CASTILLO 2630', latitude: -34.63289, longitud: -58.400638},
     99: {name: 'POWER CONSULTANT', origin: 'Nacional', sector: 'BPO', status: 'En Operación', address: 'GRITO DE ASENCIO 3650', latitude: -34.647991, longitud: -58.412996},
     100: {name: 'CONSULTORA NÚCLEO', origin: 'Nacional', sector: 'BPO', status: 'En Operación', address: 'AV. CASEROS 3405', latitude: -34.638397, longitud: -58.413379},
@@ -329,7 +333,7 @@ desired effect
     110: {name: 'GLD CONSULTORES', origin: 'Nacional', sector: 'SOFTWARE', status: 'En Operación', address: 'AV. CASEROS 3405', latitude: -34.638397, longitud: -58.413379},
     111: {name: 'MOVILGATE', origin: 'Nacional', sector: 'SOFTWARE', status: 'En Operación', address: 'PATAGONES 2827', latitude: -34.637695, longitud: -58.402283},
     112: {name: 'TELEFONICA GLOBAL TECHNOLOGY', origin: 'Exterior', sector: 'BPO', status: 'En Operación', address: 'CHICLANA 3345', latitude: -34.63447, longitud: -58.411518},
-    113: {name: 'AIV (Central de pasajes)', origin: 'Nacional', sector: 'e', COMMERCE: 'status  En Operación', address: 'AMANCIO ALCORTA 2801', latitude: -34.644872, longitud: -58.400863},
+    113: {name: 'AIV (Central de pasajes)', origin: 'Nacional', sector: 'E-COMMERCE', status: 'En Operación', address: 'AMANCIO ALCORTA 2801', latitude: -34.644872, longitud: -58.400863},
     114: {name: 'DAXA', origin: 'Exterior', sector: 'SOFTWARE', status: 'En Obra', address: 'AV. CASEROS 2602', latitude: -34.636011, longitud: -58.399064},
     115: {name: 'CENTRY SA', origin: 'Nacional', sector: 'HARDWARE', status: 'En Operación', address: 'CACHI 774', latitude: -34.651746, longitud: -58.410991},
     116: {name: 'BIBLOS', origin: 'Nacional', sector: 'BPO', status: 'En Operación', address: 'CHICLANA 3345', latitude: -34.63447, longitud: -58.411518},
@@ -369,7 +373,7 @@ desired effect
     150: {name: 'NETNIX', origin: 'Nacional', sector: 'BPO', status: 'En Operación', address: 'AV. CASEROS 3405', latitude: -34.638397, longitud: -58.413379},
     151: {name: 'VIAJO BIEN ', origin: 'Nacional', sector: 'BPO', status: 'En Operación', address: 'LAVARDEN 157', latitude: -34.638434, longitud: -58.401718},
     152: {name: 'ASATEJ', origin: 'Exterior', sector: 'BPO', status: 'En Operación', address: 'AV. CASEROS 3301', latitude: -34.638097, longitud: -58.411757},
-    153: {name: 'BEST DAY ', origin: 'Exterior', sector: 'e', COMMERCE: 'status En Obra', address: 'AV. CASEROS 3301', latitude: -34.638097, longitud: -58.411757},
+    153: {name: 'BEST DAY ', origin: 'Exterior', sector: 'E-COMMERCE', status: 'En Obra', address: 'AV. CASEROS 3301', latitude: -34.638097, longitud: -58.411757},
     154: {name: 'USAL', origin: 'Nacional', sector: 'EDUCACION', status: 'En Obra', address: 'ZABALETA 330', latitude: -34.641057, longitud: -58.402778},
     155: {name: 'VULSAI-MANGO', origin: 'Nacional', sector: 'SOFTWARE', status: 'En Operación', address: 'PATAGONES 2827', latitude: -34.637695, longitud: -58.402283},
     156: {name: 'OPTICOM', origin: 'Nacional', sector: 'SOFTWARE', status: 'En Operación', address: 'MANUEL GARCIA 233', latitude: -34.638559, longitud: -58.396404},
@@ -465,14 +469,17 @@ desired effect
 
   // Diccionario con el ID de la empresa y con el Marker utilizado por leaflet
   var companiesMarkers = {};
-  
+  var marker;
+  var sector;
+  var sectorIcon;
   for (var key in raw_companies) {
     if (raw_companies.hasOwnProperty(key)) {
-      var marker = L.marker([raw_companies[key]['latitude'], raw_companies[key]['longitud']]);
+      sector = raw_companies[key].sector;
+      marker = L.marker([raw_companies[key]['latitude'], raw_companies[key]['longitud']], {icon:getColorIcon(sector)});
       companiesMarkers[key] = marker;
       marker.bindPopup("<p>Empresa: " + raw_companies[key].name + "</p>" +
                        "<p>Dirección: " + raw_companies[key].address + "</p>" +
-                       "<p>Sector: " + raw_companies[key].sector + "</p>" +
+                       "<p>Sector: " + sector + "</p>" +
                        "<p>Origen: " + raw_companies[key].origin + "</p>" +
                        "<p>Estado: " + raw_companies[key].status + "</p>");
     }
@@ -487,7 +494,19 @@ desired effect
   }).addTo(mymap);
 
   //Son los limites de parque patricios, habria q cambiarlo por el de distrito tecnologico
-  var border = [[-34.630403, -58.411723],[-34.627383, -58.391102],[-34.640166, -58.389900],[-34.648428, -58.412216]];
+  var border = [
+                [-34.631164, -58.399274],
+                [-34.635050, -58.410540],
+                [-34.634176, -58.411001],
+                [-34.637454, -58.416143],
+                [-34.638855, -58.415915],
+                [-34.657120, -58.416399], 
+                [-34.655108, -58.412826],
+                [-34.654084, -58.410101],
+                [-34.650254, -58.405230],
+                [-34.645285, -58.401529],
+                [-34.641916, -58.395055]
+                ];
   var polygon = L.polygon(border).addTo(mymap);
 
 //  $("#bpo").on('click', function() { 
