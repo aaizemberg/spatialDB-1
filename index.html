@@ -516,15 +516,19 @@ desired effect
 
   function addMarkersBySector(sector){
     var count = 0;
+    var points = [];
     for(var key in raw_companies){
       if(raw_companies[key].sector == sector){
         companiesMarkers[key].addTo(mymap);
         count++;
+        points.push([raw_companies[key].latitude, raw_companies[key].longitud]);
       }else{
         companiesMarkers[key].removeFrom(mymap)
       }
     }
     $( "#company-count" ).text(count);
+    var bounds = new L.LatLngBounds(points);
+    mymap.fitBounds(bounds);
   }
   function addMarker(id){
     companiesMarkers[id].addTo(mymap);
