@@ -481,8 +481,8 @@ desired effect
                        "<p>Dirección: " + raw_companies[key].address + "</p>" +
                        "<p>Sector: " + sector + "</p>" +
                        "<p>Origen: " + raw_companies[key].origin + "</p>" +
-                       "<p>Estado: " + raw_companies[key].status + "</p>" );//+
-                       //"<a href=\"#\" onclick=\"moreInfo('"+ key + "');\">Mas informacion</a>");
+                       "<p>Estado: " + raw_companies[key].status + "</p>" +
+                       "<a href='www.google.com/search?q=distrito tecnologico " + raw_companies[key].name +"' target='_blank' >Mas informacion</a>");
     }
   }
   
@@ -562,8 +562,8 @@ desired effect
   }
 
   function moreInfo(id){
-    console.log(id);
-    marker.closePopup();
+    var companie = companiesMarkers[id];
+
   }
 
 </script>
