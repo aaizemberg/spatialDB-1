@@ -557,13 +557,13 @@ desired effect
   if(location.search.includes("company_id")){
     var id = location.search.substring(12);
     addMarker(id);
+    centerData(id)
   }else{
     addAllMarkers();
   }
 
-  function moreInfo(id){
-    var companie = companiesMarkers[id];
-
+  function centerData(id){
+    mymap.setZoomAround([raw_companies[id].latitude, raw_companies[id].longitud], 18);
   }
 
 </script>
