@@ -68,7 +68,7 @@ desired effect
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>D</b>T</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg">Distrito <b>Tecnologico</b></span>
+      <span class="logo-lg">Distrito <b>Tecnológico</b></span>
     </a>
 
     <!-- Header Navbar -->
@@ -135,7 +135,7 @@ desired effect
     <section class="content-header">
       <h1>
         Mapa
-        <small>Distrito tecnologico</small>
+        <small>Distrito Tecnológico</small>
       </h1>
     </section>
 
@@ -169,17 +169,11 @@ desired effect
           <div class="row">
             <div class="col-lg-12 col-xs-8">
               <!-- small box -->
-              <div class="small-box bg-aqua">
+              <div class="small-box bg-aqua" id="add">
                 <a href="#" onclick="addAllMarkers();" class="small-box-footer">Mostrar todas las empresas</a>
               </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-xs-3">
-          <div class="row">
-            <div class="col-lg-12 col-xs-8">
               <!-- small box -->
-              <div class="small-box bg-aqua">
+              <div class="small-box bg-aqua" id="remove">
                 <a href="#" onclick="removeAllMarkers();" class="small-box-footer">Ocultar todas las empresas</i></a>
               </div>
             </div>
@@ -542,13 +536,17 @@ desired effect
       companiesMarkers[key].addTo(mymap);
     }
     $( "#company-count" ).text(count);
+    $( "#add" ).hide();
+    $( "#remove" ).show();
   }
 
   function removeAllMarkers(){
    for (var key in companiesMarkers) {
       companiesMarkers[key].removeFrom(mymap);
     } 
-    $( "#company-count" ).text("0")
+    $( "#company-count" ).text("0");
+    $( "#add" ).show();
+    $( "#remove" ).hide();
   }
   
   if(location.search.includes("company_id")){
